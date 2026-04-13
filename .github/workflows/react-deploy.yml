@@ -1,0 +1,40 @@
+name: Deploy React App (Self Hosted)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Debug Info
+        run: |
+          echo "Running on self-hosted runner"
+          whoami
+          pwd
+
+      - name: Go to Project Directory
+        run: |
+          cd /home/nix/react_runner
+          ls -la
+
+      - name: Pull Latest Code
+        run: |
+          cd /home/nix/react_runner
+          git pull origin main
+
+      - name: Stop Existing Containers
+        run: |
+          cd /home/nix/react_runner
+          docker-compose down
+
+      - name: Build & Start Containers
+        run: |
+          cd /home/nix/react_runner
+          docker-compose up -d --build
+
+      - name: Cleanup Old Images
+        run: |
+          docker image prune -f
