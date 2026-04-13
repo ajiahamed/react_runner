@@ -22,7 +22,8 @@ jobs:
 
       - name: Pull Latest Code
         run: |
-          cd /home/nix/react_runner
+          cd /workspace
+          #cd /home/nix/react_runner
           git pull origin main
 
       - name: Stop Existing Containers
