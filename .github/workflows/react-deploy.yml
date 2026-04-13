@@ -31,7 +31,7 @@ jobs:
 
       - name: Build & Start Containers
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
 
       - name: Cleanup Old Images
         run: |
